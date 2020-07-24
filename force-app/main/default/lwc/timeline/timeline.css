@@ -1,0 +1,13 @@
+.invisible{
+    opacity:0;
+}
+.visible{
+    border-right:0.5px solid;
+    border-color:gray;
+}
+.timeaxis{
+    border-right:0.5px solid;
+    border-color:gray;
+    width:30px;
+    padding:3px 5px;   
+}

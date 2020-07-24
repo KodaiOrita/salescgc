@@ -1,0 +1,15 @@
+<template>
+    <table>
+        <tr>
+            <td>名前</td>
+            <td>電話</td>
+            <td>メールアドレス</td>
+        </tr>
+        <template for:each={contacts.data} for:item="contact">
+            <c-contactdata 
+                key={contact.Id} 
+                contact={contact} >
+            </c-contactdata>
+        </template>
+    </table>    
+</template>

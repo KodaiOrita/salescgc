@@ -1,0 +1,20 @@
+<template>
+    <div class="container">
+        <div class="timeline">
+            <template for:each={timelines} for:item="timeline">
+                <c-timeline
+                    key={timeline}
+                    timeline={timeline}>
+                </c-timeline>
+            </template>        
+        </div>
+        <div class="eachworkshift">
+            <template for:each={workshifts} for:item="workshift">
+                <c-workday
+                    key={workshift.date}
+                    workday={workshift}>
+                </c-workday>
+            </template>
+        </div>
+    </div>    
+</template>

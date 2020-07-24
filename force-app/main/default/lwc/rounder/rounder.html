@@ -1,0 +1,19 @@
+<template>
+    <div class="container">
+        <div>
+            {rounder.name}
+        </div>
+        <template for:each={rounder.SubmitedWorkShifts} for:item="SubmitedWorkShift">
+            <c-submitedworkshift
+                key={rounder.roundercode}
+                submitedworkshift={SubmitedWorkShift}>
+            </c-submitedworkshift>
+        </template>
+        <template for:each={rounder.Demands} for:item=Demand>
+            <c-demand
+                key={Demand.shiftcode__c}
+                demand={Demand}>
+            </c-demand>
+        </template>
+    </div>
+</template>
