@@ -1,30 +1,32 @@
 import { LightningElement } from 'lwc';
-import { workshifts } from 'c/workshiftdata';
-export default class Workshiftwrapper extends LightningElement {
-    workshifts = workshifts;
-    timelines = [];
-    static starttime;
+
+export default class Commonsetting extends LightningElement {
+    //timeline.cssの.timeaxisにて時間軸のwidthを定義(30分単位)
+    static constwidthperquoter = 20;
     static test = 'test';
     
-
     //時間軸の配列をfor文で作るよ
-    constructor(){
-        super();
-        //何分おきにタイムテーブルを作成するか決定。
-        const TimeSpliter = 30;
-        
+    static get startTime(){
         let Time = new Date();
         Time.setHours(7);
         Time.setMinutes(0);
         Time.setSeconds(0); 
-        this.starttime = Time;
-
+        return Time;
+    }
+    /*
+    static get endTime(){
         let EndTime = new Date();
         EndTime.setHours(20);
         EndTime.setMinutes(0);
         EndTime.setSeconds(0); 
+        return EndTime
+    }
+    static get timeline(){
+        let timelines = [];
+        //何分おきにタイムテーブルを作成するか決定。
+        const TimeSpliter = 30;
 
-        let TimeDiff = EndTime.getTime() - Time.getTime();
+        let TimeDiff = endTime.getTime() - startTime.getTime();
         let TimeDiffMin = TimeDiff / 1000 / 60;
         let NumIterate = TimeDiffMin / TimeSpliter;
         console.log(NumIterate);
@@ -54,7 +56,9 @@ export default class Workshiftwrapper extends LightningElement {
             //m.set('key',StrTime);
             
             obj.key=StrTime;
-            this.timelines.push(obj);
+            timelines.push(obj);
         }
+        return timelines;
     }
+    */
 }

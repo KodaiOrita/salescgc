@@ -1,3 +1,12 @@
 .container{
     margin-left:30px;
+    padding-bottom:70px;
+}
+.shift-container{
+    margin-left:30px;
+}
+.demands-container{
+    margin-left:30px;
+    position: relative;
+    width:100%;
 }

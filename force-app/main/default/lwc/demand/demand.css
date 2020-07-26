@@ -1,3 +1,9 @@
 .container{
-    margin-left:30px;
+    border:1px solid;
+    background-color: #a0b2e6;
+    border-color:#dde1e3;
+    opacity:0.6;
+    position: absolute;
+    top: 0;
+
 }

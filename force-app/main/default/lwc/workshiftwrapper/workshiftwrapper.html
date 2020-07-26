@@ -3,7 +3,7 @@
         <div class="timeline">
             <template for:each={timelines} for:item="timeline">
                 <c-timeline
-                    key={timeline}
+                    key={timeline.key}
                     timeline={timeline}>
                 </c-timeline>
             </template>        

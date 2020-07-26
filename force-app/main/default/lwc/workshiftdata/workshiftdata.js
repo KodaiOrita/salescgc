@@ -10,8 +10,8 @@ export const workshifts = [
                     {
                         "shiftcode":"111111",
                         "workDay__c":"2020-07-01",
-                        "availableStartingTime__c":"10:00:00.000Z",
-                        "availableEndingTime__c":"18:00:00.000Z"
+                        "startingTime__c":"10:00:00.000Z",
+                        "endingTime__c":"18:00:00.000Z"
                     }
                 ],
                 "Demands":[
@@ -26,8 +26,8 @@ export const workshifts = [
                         "shiftcode__c":"211112",
                         "shopName__c":"ダイコク",
                         "workDay__c":"2020-07-01",
-                        "startingTime__c":"13:00:00.000Z",
-                        "endingTime__c":"18:00:00.000Z"
+                        "startingTime__c":"06:00:00.000Z",
+                        "endingTime__c":"12:00:00.000Z"
                     }
                 ]
 
@@ -39,8 +39,8 @@ export const workshifts = [
                     {
                         "shiftcode":"11111２",
                         "workDay__c":"2020-07-01",
-                        "availableStartingTime__c":"09:00:00.000Z",
-                        "availableEndingTime__c":"18:00:00.000Z"
+                        "startingTime__c":"09:00:00.000Z",
+                        "endingTime__c":"18:00:00.000Z"
                     }
                 ],
                 "Demands":[
