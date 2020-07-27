@@ -1,0 +1,11 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Rounder__c",
+                "referenceId": "Rounder__cRef1"
+            },
+            "Name": "田中次郎"
+        }
+    ]
+}

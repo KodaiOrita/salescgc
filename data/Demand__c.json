@@ -1,0 +1,15 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Demand__c",
+                "referenceId": "Demand__cRef1"
+            },
+            "Name": "ヤマダ電機学園都市店で勤務",
+            "startingHour__c": "09:00:00.000Z",
+            "endingTime__c": "18:00:00.000Z",
+            "workDay__c": "2020-07-01",
+            "shopName__c": "ヤマダ電機学園都市店"
+        }
+    ]
+}

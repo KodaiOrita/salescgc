@@ -1,0 +1,12 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "SubmitedWorkShift__c",
+                "referenceId": "SubmitedWorkShift__cRef1"
+            },
+            "Name": "7月1日のシフト",
+            "workDay__c": "2020-07-01"
+        }
+    ]
+}
