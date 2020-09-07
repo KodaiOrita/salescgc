@@ -1,6 +1,6 @@
 public class RoundersWrapper {
     @AuraEnabled
-    public Id id {get;set;}
+    public Id Id {get;set;}
 
     @AuraEnabled
     public String Name {get;set;}

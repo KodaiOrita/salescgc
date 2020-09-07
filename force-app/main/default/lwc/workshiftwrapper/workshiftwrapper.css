@@ -6,3 +6,9 @@
     /*rounder,demandがともに30pxであるため。*/
     margin-left:60px;
 }
+.condition{
+    width:300px;
+}
+.displayNone{
+    display:none;
+}

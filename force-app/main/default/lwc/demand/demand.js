@@ -7,10 +7,21 @@ export default class Demand extends LightningElement {
     constwidth = Commonsetting.constwidthperquoter;
     get starttime(){
         //開始時刻
+        //項目変更時はこちらも直す
+        console.log(this.demand.Id + 'start' + this.demand.startingHour__c);
+        console.log(this.demand.Id +  'end' + this.demand.endingTime__c);
+        
         let startTime = new Date(this.demand.workDay__c);
-        startTime.setHours(this.demand.startingTime__c.slice(0,2));
-        startTime.setMinutes(this.demand.startingTime__c.slice(3,2));
-        startTime.setSeconds(this.demand.startingTime__c.slice(6,2));
+        console.log(startTime);
+
+        let h = String(Math.floor(this.demand.startingHour__c / 3600000) + 100).substring(1);
+        let m = String(Math.floor((this.demand.startingHour__c - h * 3600000)/60000)+ 100).substring(1);
+        let s = String(Math.round((this.demand.startingHour__c - h * 3600000 - m * 60000)/1000)+ 100).substring(1);
+
+        console.log(h + ":" + m +":" + s);
+        startTime.setHours(h);
+        startTime.setMinutes(m);
+        startTime.setSeconds(s);
         
         return startTime;
     }
@@ -18,11 +29,28 @@ export default class Demand extends LightningElement {
     get endtime(){
         //終了時刻
         let endTime = new Date(this.demand.workDay__c);
-        endTime.setHours(this.demand.endingTime__c.slice(0,2));
-        endTime.setMinutes(this.demand.endingTime__c.slice(3,2));
-        endTime.setSeconds(this.demand.endingTime__c.slice(6,2));
+        let h = String(Math.floor(this.demand.endingTime__c / 3600000) + 100).substring(1);
+        let m = String(Math.floor((this.demand.endingTime__c - h * 3600000)/60000)+ 100).substring(1);
+        let s = String(Math.round((this.demand.endingTime__c - h * 3600000 - m * 60000)/1000)+ 100).substring(1);
+
+        endTime.setHours(h);
+        endTime.setMinutes(m);
+        endTime.setSeconds(s);
 
         return endTime;
+    }
+    @api get StartTimeForRender(){
+        let h = String(Math.floor(this.demand.startingHour__c / 3600000) + 100).substring(1);
+        let m = String(Math.floor((this.demand.startingHour__c - h * 3600000)/60000)+ 100).substring(1);
+
+        return h + ":" + m;
+    }
+
+    @api get EndTimeForRender(){
+        let h = String(Math.floor(this.demand.endingTime__c / 3600000) + 100).substring(1);
+        let m = String(Math.floor((this.demand.endingTime__c - h * 3600000)/60000)+ 100).substring(1);
+
+        return h + ":" + m;
     }
 
     diffMin(end,start){

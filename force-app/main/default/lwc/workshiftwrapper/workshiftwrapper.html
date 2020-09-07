@@ -1,5 +1,29 @@
 <template>
     <div class="container">
+        <div class="condition">
+
+            <label><input type="radio" name="radioButtonGroup" value="月指定" onchange={handledateorMonthChange}>月指定</label>
+            <label><input type="radio" name="radioButtonGroup" value="日付指定" onchange={handledateorMonthChange}>日付指定</label>
+
+            <div class={monthSelect}>
+                <lightning-combobox
+                    name="monthOption"
+                    label="月を指定してください"
+                    placeholder={YYMM}
+                    options={monthoptions}
+                    onchange={handleMonthChange} >
+                </lightning-combobox>
+            </div>
+            <div class={dateSelect}>
+                <lightning-input type="date" name="dateinput" label="日付を指定してください" value={today} onchange={handleDateChange}></lightning-input>
+                {date}
+            </div>
+            <label><input type="checkbox" name="onlyShiftExist" value=true onchange={handleonlyShiftExist}>シフト提出者のみ検索</label>
+            
+            <p class="slds-m-bottom_small">
+                <lightning-button label="検索" onclick={handleSearchShift}></lightning-button>
+            </p>
+        </div>
         <div class="timeline">
             <template for:each={timelines} for:item="timeline">
                 <c-timeline
@@ -9,12 +33,18 @@
             </template>        
         </div>
         <div class="eachworkshift">
-            <template for:each={workshifts} for:item="workshift">
-                <c-workday
-                    key={workshift.date}
-                    workday={workshift}>
-                </c-workday>
+            <template if:true={isSeleted}>
+                <template for:each={workshifts} for:item="workshift">
+                    <c-workday
+                        key={workshift.dateOfMonth}
+                        workday={workshift}>
+                    </c-workday>
+                </template>
             </template>
+
         </div>
+        <template if:true={error}>
+            eror
+        </template>
     </div>    
 </template>

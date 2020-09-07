@@ -1,20 +1,22 @@
 <template>
     <div class="container">
         <div>
-            {rounder.name}
+            {rounder.Name}
         </div>
+        <!--
         <div class="shift-container">
-            <template for:each={rounder.SubmitedWorkShifts} for:item="SubmitedWorkShift">
+            <template for:each={rounder.SubmitedWorkShift} for:item="SubmitedWorkShift">
                 <c-submitedworkshift
-                    key={rounder.roundercode}
+                    key={SubmitedWorkShift.Id}
                     submitedworkshift={SubmitedWorkShift}>
                 </c-submitedworkshift>
             </template>
         </div>
+        -->
         <div class="demands-container">
-            <template for:each={rounder.Demands} for:item=Demand>
+            <template for:each={rounder.Demand} for:item=Demand>
                 <c-demand
-                    key={Demand.shiftcode__c}
+                    key={Demand.Id}
                     demand={Demand}>
                 </c-demand>
             </template>

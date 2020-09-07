@@ -1,10 +1,10 @@
 <template>
     <div class="day">
-        {workday.date}
+        {workday.dateOfMonth}
     </div>
-    <template for:each={workday.Rounders} for:item="rounder">
+    <template for:each={workday.RoundersWrappers} for:item="rounder">
         <c-rounder
-            key={rounder.roundercode}
+            key={rounder.id}
             rounder={rounder}>
         </c-rounder>
     </template>

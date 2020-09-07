@@ -1,15 +1,15 @@
 public class LWCWorkShiftController {
-    //	    @AuraEnabled(cacheable=true)
-    public List<WorkShiftWrapper> getWorkShifts(String YYMMM){
+    @AuraEnabled(cacheable=true)
+    public static List<WorkShiftWrapper> getWorkShifts(String YYMM){
         //designatedMonthはYYYY-MMで渡す//
-        String StrYYMM = YYMMM;
+        String StrYYMM = YYMM;
 
         List<Date> dates = getDatesOfDesignatedMonth(StrYYMM);
         List<Rounder__c> rounders = getRounders();
         List<Demand__c> demands = getRelatedDemands(dates,rounders);
         
 
-        //次にWorkShiftWrapperに各日付とRoundersWrappersを全て入れます。
+        //WorkShiftWrapperに各日付とRoundersWrappersを全て入れます。
         List<WorkShiftWrapper> WorkShiftWrappers = new List<WorkShiftWrapper>();
         for (Date dts : dates) {
             //日付分のWorkShiftWrapperを作る。
@@ -28,26 +28,46 @@ public class LWCWorkShiftController {
                 RoundersWrappers.add(rw);
             }
             wsw.RoundersWrappers = RoundersWrappers;
-            WSWMap.put(wsw.dateOfMonth,wsw);
-        }
 
-        for (Demand__c dmnd : demands) {
+            for (RoundersWrapper rw : RoundersWrappers){
+                List<Demand__c> dlist = new List<Demand__c>();   
+                for (Demand__c dmnd : demands) {
+                    if(rw.id == dmnd.RefRounder__c && wsw.dateOfMonth == dmnd.workDay__c){
+                        dlist.add(dmnd);
+                    }      
+                } 
+                rw.Demand = dlist;
+
+                //submitedworkshiftも入れる。
+                
+                
+                //WSWMap.put(wsw.dateOfMonth,wsw);
+            }
+        }
+        //Demandを全て回して、入れる日付を探す(WorkShiftWrappers)。
+        //入れる日付の中で、入れるラウンダーを探す。リスト形式にして。(WorkShiftWrappers)。
+        
+
+
+        /*for (Demand__c dmnd : demands) {
             //MapでWorkShiftWrapperの中から対象の日付を検索。
             WorkShiftWrapper targetWSW = WSWMap.get(dmnd.workDay__c);
-
+            System.debug(dmnd.Name + targetWSW);
             //日付があっていたら、その中のラウンダーを見て、ラウンダーの中のdmandに入れる。リスト形式にする。           
+
+            List<Demand__c> dlist = new List<Demand__c>();
             for (RoundersWrapper rw : targetWSW.RoundersWrappers){
-                List<Demand__c> dlist = new List<Demand__c>();
                 if(rw.id == dmnd.RefRounder__c){
                     dlist.add(dmnd);
                 }
-                rw.Demand = dlist;
             }       
-        }
-
+            rw.Demand = dlist;
+        */
+        
         return WorkShiftWrappers;
     }
-    public List<Date> getDatesOfDesignatedMonth(String designatedYYMMM){
+    @AuraEnabled(cacheable=true)
+    public static List<Date> getDatesOfDesignatedMonth(String designatedYYMMM){
         //最初の日
         //年取得
         Integer designatedYY = Integer.valueOf(designatedYYMMM.mid(0,4));
@@ -68,18 +88,19 @@ public class LWCWorkShiftController {
         }
         return daysList;
     }
-
-    public List<Rounder__c> getRounders(){
+    @AuraEnabled(cacheable=true)
+    public static List<Rounder__c> getRounders(){
         //Rounderを全て検索
         List<Rounder__c> rounders =  [SELECT Id, Name,rounderCode__c FROM Rounder__c];
 
         return rounders;
     }
-
-    public List<Demand__c> getRelatedDemands(List<Date> Dates ,List<Rounder__c> rounders){
+    @AuraEnabled(cacheable=true)
+    public static List<Demand__c> getRelatedDemands(List<Date> Dates ,List<Rounder__c> rounders){
         List<Demand__c> demands = [SELECT Id,Name,shiftcode__c,RefRounder__c,workDay__c,startingHour__c,endingTime__c,shopName__c 
                                     FROM Demand__c 
                                     WHERE RefRounder__c IN :rounders AND workDay__c IN :Dates];
+                                    System.debug('ディマンドチェック' + demands);
         return demands;
     }
 }
